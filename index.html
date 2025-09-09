@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeKpop Trade - Community & Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b8b;
+            --secondary: #7c4dff;
+            --accent: #00e5ff;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #00e676;
+            --warning: #ffd600;
+            --danger: #ff5252;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #ff3366;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%237c4dff" fill-opacity="0.1" d="M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,128C960,96,1056,96,1152,117.3C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: contain;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #c5c8d9;
+        }
+        
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--light);
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+        
+        .feature-card p {
+            color: #a0a3bd;
+        }
+        
+        /* Trending Items */
+        .trending {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .item-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(124, 77, 255, 0.2);
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+        
+        .item-image {
+            height: 200px;
+            width: 100%;
+            background: linear-gradient(45deg, #ff6b8b, #7c4dff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .item-content {
+            padding: 20px;
+        }
+        
+        .item-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+        
+        .item-desc {
+            color: #a0a3bd;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .item-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .item-actions button {
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Community Section */
+        .community {
+            padding: 80px 0;
+        }
+        
+        .community-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .community-text {
+            flex: 1;
+        }
+        
+        .community-image {
+            flex: 1;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(to right, rgba(122, 76, 255, 0.2), rgba(255, 107, 139, 0.2));
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #c5c8d9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            padding: 60px 0 30px;
+            border-top: 1px solid var(--secondary);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #a0a3bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(124, 77, 255, 0.2);
+            color: #a0a3bd;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .community-content {
+                flex-direction: column;
+            }
+            
+            .feature-card, .item-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-dragon"></i>
+                    <h1>AnimeKpop Trade</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-store"></i> Marketplace</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> Community</a></li>
+                        <li><a href="#"><i class="fas fa-box-open"></i> My Items</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Login</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Trade, Connect, and Share Your Passion</h2>
+            <p>Welcome to the ultimate community for anime and Kpop fans to trade collectibles, discuss your favorite series, and connect with fellow enthusiasts.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for anime figures, albums, merch...">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span>AnimeKpop Trade</span>?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Easy Trading</h3>
+                    <p>Trade your anime and Kpop items with fans worldwide. Secure transactions and verified users.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Community Hub</h3>
+                    <p>Join discussions, share your collection, and connect with fellow enthusiasts in our community spaces.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Rare Finds</h3>
+                    <p>Discover rare collectibles, limited editions, and exclusive merchandise from your favorite series and groups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trending Items Section -->
+    <section class="trending">
+        <div class="container">
+            <h2 class="section-title">Trending <span>Items</span></h2>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-image">
+                        <i class="fas fa-record-vinyl"></i>
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">BTS Proof Album (Signed)</h3>
+                        <p class="item-desc">Limited edition signed album with all photocard sets included.</p>
+                        <div class="item-footer">
+                            <div class="item-price">$149.99</div>
+                            <div class="item-actions">
+                                <button><i class="fas fa-heart"></i></button>
+                                <button><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image">
+                        <i class="fas fa-user-ninja"></i>
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Naruto Figurine</h3>
+                        <p class="item-desc">Limited edition Figuarts Zero Naruto Uzumaki figurine.</p>
+                        <div class="item-footer">
+                            <div class="item-price">$89.99</div>
+                            <div class="item-actions">
+                                <button><i class="fas fa-heart"></i></button>
+                                <button><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image">
+                        <i class="fas fa-compact-disc"></i>
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Blackpink Born Pink</h3>
+                        <p class="item-desc">Limited edition box set with exclusive photocards.</p>
+                        <div class="item-footer">
+                            <div class="item-price">$79.99</div>
+                            <div class="item-actions">
+                                <button><i class="fas fa-heart"></i></button>
+                                <button><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-image">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Demon Slayer Necklace</h3>
+                        <p class="item-desc">Official Demon Slayer Corps necklace with box.</p>
+                        <div class="item-footer">
+                            <div class="item-price">$45.99</div>
+                            <div class="item-actions">
+                                <button><i class="fas fa-heart"></i></button>
+                                <button><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community">
+        <div class="container">
+            <h2 class="section-title">Join Our <span>Community</span></h2>
+            <div class="community-content">
+                <div class="community-text">
+                    <h3>Connect with fellow fans</h3>
+                    <p>Our community features are designed to help you connect, share, and discuss everything related to anime and Kpop.</p>
+                    <ul>
+                        <li>Join themed discussion channels</li>
+                        <li>Share your collection and hauls</li>
+                        <li>Participate in virtual events and watch parties</li>
+                        <li>Organize meetups and trading sessions</li>
+                        <li>Get recommendations from fellow fans</li>
+                    </ul>
+                    <button class="btn btn-primary" style="margin-top: 20px;">Join Discord Server</button>
+                </div>
+                <div class="community-image">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Start Trading?</h2>
+            <p>Join thousands of anime and Kpop fans who are already trading, connecting, and sharing their passion on our platform.</p>
+            <button class="btn btn-primary">Create Your Account</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>AnimeKpop Trade</h3>
+                    <p>The premier platform for anime and Kpop fans to trade collectibles and connect with community.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Marketplace</h3>
+                    <ul>
+                        <li><a href="#">All Items</a></li>
+                        <li><a href="#">Anime Merchandise</a></li>
+                        <li><a href="#">Kpop Albums</a></li>
+                        <li><a href="#">Figurines</a></li>
+                        <li><a href="#">Clothing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="#">Forums</a></li>
+                        <li><a href="#">Discord Server</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Meetups</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Safety Guidelines</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AnimeKpop Trade. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Like button functionality
+            const likeButtons = document.querySelectorAll('.item-actions button:first-child');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    if (this.classList.contains('active')) {
+                        this.innerHTML = '<i class="fas fa-heart" style="color: #ff6b8b;"></i>';
+                    } else {
+                        this.innerHTML = '<i class="fas fa-heart"></i>';
+                    }
+                });
+            });
+            
+            // Auth buttons
+            const authButtons = document.querySelectorAll('.auth-buttons button');
+            authButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Authentication system would open here. This is a frontend demo.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
